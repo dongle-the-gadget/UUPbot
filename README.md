@@ -32,6 +32,10 @@ but if you are fine with it, here's how (please note that you'll need .NET 6 pre
 
 Just type a forward-slash to see all commands that this bot offers (currently only `list`)
 
+## Bot running
+
+![Unofficial UUP dump bot running on a test server](/unknown.png)
+
 ## Acknowledgements
 
 This project wouldn't be possible without [Gustave Monce](https://github.com/gus33000/UUPMediaCreator), [DSharpPlus](https://github.com/DSharpPlus/DSharpPlus), [DWaffles](https://github.com/DWaffles/DSharpPlus/tree/threads), UUP dump, and Microsoft.
