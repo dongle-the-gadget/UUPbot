@@ -1,0 +1,17 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+    <PropertyGroup>
+        <TargetFramework>netstandard2.1</TargetFramework>
+        <LangVersion>9.0</LangVersion>
+    </PropertyGroup>
+
+    <ItemGroup>
+      <PackageReference Include="System.Text.Json" Version="6.0.0-preview.6.21352.12" />
+    </ItemGroup>
+
+    <ItemGroup>
+        <ProjectReference Include="..\Cabinet\Cabinet.csproj" />
+        <ProjectReference Include="..\CompDB\CompDB.csproj" />
+    </ItemGroup>
+
+</Project>

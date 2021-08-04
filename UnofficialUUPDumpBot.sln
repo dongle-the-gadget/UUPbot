@@ -1,0 +1,55 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.0.31512.422
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UnofficialUUPDumpBot", "UnofficialUUPDumpBot\UnofficialUUPDumpBot.csproj", "{E382A963-210D-42FB-B2D7-459A812901D6}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WindowsUpdateLib", "WindowsUpdateLib\WindowsUpdateLib.csproj", "{E1476E5F-A63A-45F4-B527-A40EC4B79BB9}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Cabinet", "Cabinet\Cabinet.csproj", "{66454110-5DEB-448E-8097-0A99B16A68C0}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CompDB", "CompDB\CompDB.csproj", "{2BBC0302-DC14-4246-B4E8-113D46F7BBB8}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DSharpPlus", "DSharpPlus\DSharpPlus.csproj", "{844AA692-E887-41EA-B441-927F45E808EB}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DSharpPlus.SlashCommands", "DSharpPlus.SlashCommands\DSharpPlus.SlashCommands.csproj", "{90F205FD-E393-44C3-BB2B-926E8200CE96}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{E382A963-210D-42FB-B2D7-459A812901D6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E382A963-210D-42FB-B2D7-459A812901D6}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E382A963-210D-42FB-B2D7-459A812901D6}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E382A963-210D-42FB-B2D7-459A812901D6}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E1476E5F-A63A-45F4-B527-A40EC4B79BB9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E1476E5F-A63A-45F4-B527-A40EC4B79BB9}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E1476E5F-A63A-45F4-B527-A40EC4B79BB9}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E1476E5F-A63A-45F4-B527-A40EC4B79BB9}.Release|Any CPU.Build.0 = Release|Any CPU
+		{66454110-5DEB-448E-8097-0A99B16A68C0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{66454110-5DEB-448E-8097-0A99B16A68C0}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{66454110-5DEB-448E-8097-0A99B16A68C0}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{66454110-5DEB-448E-8097-0A99B16A68C0}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2BBC0302-DC14-4246-B4E8-113D46F7BBB8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2BBC0302-DC14-4246-B4E8-113D46F7BBB8}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2BBC0302-DC14-4246-B4E8-113D46F7BBB8}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2BBC0302-DC14-4246-B4E8-113D46F7BBB8}.Release|Any CPU.Build.0 = Release|Any CPU
+		{844AA692-E887-41EA-B441-927F45E808EB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{844AA692-E887-41EA-B441-927F45E808EB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{844AA692-E887-41EA-B441-927F45E808EB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{844AA692-E887-41EA-B441-927F45E808EB}.Release|Any CPU.Build.0 = Release|Any CPU
+		{90F205FD-E393-44C3-BB2B-926E8200CE96}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{90F205FD-E393-44C3-BB2B-926E8200CE96}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{90F205FD-E393-44C3-BB2B-926E8200CE96}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{90F205FD-E393-44C3-BB2B-926E8200CE96}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {8D52CA8B-22B0-4908-BC76-87548286B37D}
+	EndGlobalSection
+EndGlobal
