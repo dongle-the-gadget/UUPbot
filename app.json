@@ -15,5 +15,5 @@
       "description": "The Discord bot token, generated from Discord Developer Portal"
     }
   },
-  "stack": "Container"
+  "stack": "container"
 }
