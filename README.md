@@ -13,4 +13,4 @@ The [following documentation](/docs/running/README.md) will give you documentati
 
 ## Acknowledgements
 
-This project wouldn't be possible without [Gustave Monce](https://github.com/gus33000/UUPMediaCreator), [DSharpPlus](https://github.com/DSharpPlus/DSharpPlus), [DWaffles](https://github.com/DWaffles/DSharpPlus/tree/threads), UUP dump, and Microsoft.
+This project wouldn't be possible without [Gustave Monce](https://github.com/gus33000/UUPMediaCreator), [DSharpPlus](https://github.com/DSharpPlus/DSharpPlus), [DWaffles](https://github.com/DWaffles/DSharpPlus/tree/threads), [UUP dump](https://uupdump.net), and Microsoft.
