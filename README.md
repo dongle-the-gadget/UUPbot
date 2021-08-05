@@ -5,9 +5,9 @@ Unofficial UUP dump bot ([UUP dump website](https://uupdump.net)) for Discord
 This bot can search through MS servers, find the latest build for a specific branch and get the UUP dump link for it.
 
 ## Running
-The [following documentation](/docs/running/README.md) will give you documentation about how to run this bot.
+Follow [this documentation](/docs/running/README.md) and get the bot up and running!
 
-## Bot running
+## Screenshot
 
 ![Unofficial UUP dump bot running on a test server](/unknown.png)
 
