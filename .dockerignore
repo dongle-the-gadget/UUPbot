@@ -1,0 +1,9 @@
+# Ignore bin and obj
+bin/
+obj/
+
+# Ignore .git
+.git
+
+# Ignore .md
+*.md

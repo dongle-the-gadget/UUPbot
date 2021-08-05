@@ -23,7 +23,7 @@ namespace UnofficialUUPDumpBot
         {
             DiscordConfiguration config = new() 
             {
-                Token = "[use yours]",
+                Token = Environment.GetEnvironmentVariable("UUPDUMP_BOTTOKEN"),
                 TokenType = TokenType.Bot
             };
 
@@ -31,7 +31,7 @@ namespace UnofficialUUPDumpBot
 
             var slashCommands = client.UseSlashCommands();
 
-            slashCommands.RegisterCommands<SlashCommands>(859328981646704661);
+            slashCommands.RegisterCommands<SlashCommands>();
 
             await client.ConnectAsync();
 

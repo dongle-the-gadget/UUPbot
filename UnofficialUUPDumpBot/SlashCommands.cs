@@ -34,41 +34,89 @@ namespace UnofficialUUPDumpBot
             return update;
         }
 
-        [SlashCommand("list", "List builds belonging to a specific channel")]
+        [SlashCommand("list", "List the latest build items belonging to a specific channel")]
         public async Task ListDumpItems(InteractionContext ctx,
-            [Option("channel", "Get the channel to get builds from")]
-            [Choice("Dev", "Dev")][Choice("Beta", "Beta")][Choice("ReleasePreview", "ReleasePreview")][Choice("Retail", "Retail")]string branch)
+            [Option("channel", "The channel to get builds from")]
+            [Choice("Dev", "Dev")][Choice("Beta", "Beta")][Choice("ReleasePreview", "ReleasePreview")][Choice("Retail", "Retail")]string branch,
+            [Option("arch", "The architecture")]
+            [Choice("x86", "x86")][Choice("x64", "amd64")][Choice("arm64", "arm64")]string arch)
         {
             await ctx.CreateResponseAsync(DSharpPlus.InteractionResponseType.DeferredChannelMessageWithSource);
 
-            DiscordEmbedBuilder embed = new DiscordEmbedBuilder();
-
-            IEnumerable<UpdateData> data = await FE3Handler.GetUpdates(null, GetRingCtacs(MachineType.amd64)[branch], string.Empty, FileExchangeV3UpdateFilter.ProductRelease).ConfigureAwait(false);
-            data = data.Select(x => TrimDeltasFromUpdateData(x));
-
-            foreach (UpdateData update in data)
+            try
             {
-                string title = update.Xml.LocalizedProperties.Title;
+                DiscordEmbedBuilder embed = new DiscordEmbedBuilder();
 
-                if (title.ToLowerInvariant().Contains("cumulative update"))
+                IEnumerable<UpdateData> data = await FE3Handler.GetUpdates(null, GetRingCtacs(Enum.Parse<MachineType>(arch))[branch], string.Empty, FileExchangeV3UpdateFilter.ProductRelease).ConfigureAwait(false);
+                data = data.Select(x => TrimDeltasFromUpdateData(x));
+
+                foreach (UpdateData update in data)
                 {
-                    continue;
+                    string title = update.Xml.LocalizedProperties.Title;
+
+                    string encodedTitle = HttpUtility.UrlEncode(title);
+
+                    HttpClient client = new HttpClient();
+                    var res = await client.GetAsync($"https://api.uupdump.net/listid.php?search={encodedTitle}");
+
+                    UUPDumpRes response = JsonSerializer.Deserialize<UUPDumpRes>(await res.Content.ReadAsStringAsync());
+
+                    if (response.response != null)
+                    {
+                        var item = response.response.builds.Values.First(f => f.arch == arch);
+
+                        embed.AddField(item.title, $"Architecture: {item.arch}\nLink: <https://uupdump.net/selectlang.php?id={item.uuid}>");
+                    }
+                    else
+                    {
+                        // We tripped an error!
+                    }
                 }
 
-                string encodedTitle = HttpUtility.UrlEncode(title);
+                await ctx.EditResponseAsync(new DiscordWebhookBuilder().AddEmbed(embed).WithContent("Here is the latest build items I've found matching your criteria."));
+            }
+            catch
+            {
+                await ctx.EditResponseAsync(new DiscordWebhookBuilder().WithContent("Sorry, but the bot encountered an error and cannot continue processing your request."));
+            }
+        }
+
+        [SlashCommand("search", "Lists the top three results matching your query")]
+        public async Task Search(InteractionContext ctx, [Option("query", "The query to search for")]string query)
+        {
+            await ctx.CreateResponseAsync(DSharpPlus.InteractionResponseType.DeferredChannelMessageWithSource);
+
+            try
+            {
+                string encodedQuery = HttpUtility.UrlEncode(query);
 
                 HttpClient client = new HttpClient();
-                var res = await client.GetAsync($"https://api.uupdump.net/listid.php?search={encodedTitle}");
+                var res = await client.GetAsync($"https://api.uupdump.net/listid.php?search={encodedQuery}");
 
+                string resJson = await res.Content.ReadAsStringAsync();
 
-                UUPDumpRes response = JsonSerializer.Deserialize<UUPDumpRes>(await res.Content.ReadAsStringAsync());
+                if (resJson.Contains("SEARCH_NO_RESULTS", StringComparison.InvariantCultureIgnoreCase))
+                {
+                    await ctx.EditResponseAsync(new DiscordWebhookBuilder().WithContent("Sorry, but the servers returned no results."));
+                }
+                else
+                {
+                    DiscordEmbedBuilder embed = new DiscordEmbedBuilder();
 
-                var item = response.response.builds.Values.OrderByDescending(f => f.title).ElementAt(0);
+                    UUPDumpRes response = JsonSerializer.Deserialize<UUPDumpRes>(await res.Content.ReadAsStringAsync());
 
-                embed.AddField(item.title, $"Architecture: {item.arch}\nLink: <https://uupdump.net/selectlang.php?id={item.uuid}>");
+                    foreach (var item in response.response.builds.Values.Take(3))
+                    {
+                        embed.AddField(item.title, $"Architecture: {item.arch}\nLink: <https://uupdump.net/selectlang.php?id={item.uuid}>");
+                    }
+
+                    await ctx.EditResponseAsync(new DiscordWebhookBuilder().AddEmbed(embed).WithContent("Here are the top three results I've found."));
+                }
             }
-
-            await ctx.EditResponseAsync(new DiscordWebhookBuilder().AddEmbed(embed).WithContent("Here are the items I've found matching your criteria."));
+            catch
+            {
+                await ctx.EditResponseAsync(new DiscordWebhookBuilder().WithContent("Sorry, but the bot encountered an error and cannot continue processing your request."));
+            }
         }
     }
 }
