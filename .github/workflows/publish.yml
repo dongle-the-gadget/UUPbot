@@ -1,0 +1,27 @@
+name: Publish
+on:
+  workflow_run:
+    workflows: [".NET"]
+    types:
+      - completed
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    env:
+      HEROKU_API_KEY: ${{ secrets.HEROKU_API_KEY }}
+    steps:
+      - uses: actions/checkout@v2
+      - name: Build Docker image
+        run: docker build -t uupdumpbot .
+      - name: Install Heroku
+        run: curl https://cli-assets.heroku.com/install-ubuntu.sh | sh
+      - name: Login with Heroku
+        run: |
+          heroku auth:login
+          heroku container:login
+      - name: Push Docker image to Heroku
+        run: |
+          docker tag uupdumpbot registry.heroku.com/dongleuupdumpbot/worker
+          docker push registry.heroku.com/dongleuupdumpbot/worker
+      - name: Release worker
+        run: heroku container:release worker -a dongleuupdumpbot
