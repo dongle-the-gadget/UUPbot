@@ -1,4 +1,4 @@
-name: Publish
+name: Publish production bot
 on:
   workflow_run:
     workflows: [".NET"]
