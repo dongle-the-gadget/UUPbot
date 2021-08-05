@@ -2,7 +2,7 @@
 If you prefer to have the application run on your local machine natively rather than through a Docker container, you'll need to install the dependencies manually.
 
 ## Install .NET
-This project uses .NET 6 Preview, so you'll need to install the .NET 6 Preview SDK from [Microsoft's website](https://dotnet.microsoft.com/download/dotnet/6.0?WT.mc_id=dotnet-35129-website)
+This project uses .NET 5, so you'll need to install the .NET 5 SDK from [Microsoft's website](https://dotnet.microsoft.com/download/dotnet/5.0)
 
 ## Building the bot
 Run the following command at bot's root folder:
