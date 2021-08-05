@@ -17,7 +17,6 @@ jobs:
         run: curl https://cli-assets.heroku.com/install-ubuntu.sh | sh
       - name: Login with Heroku
         run: |
-          heroku auth:login
           heroku container:login
       - name: Push Docker image to Heroku
         run: |
