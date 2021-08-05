@@ -13,8 +13,6 @@ jobs:
       - uses: actions/checkout@v2
       - name: Build Docker image
         run: docker build -t uupdumpbot .
-      - name: Install Heroku
-        run: curl https://cli-assets.heroku.com/install-ubuntu.sh | sh
       - name: Login with Heroku
         run: |
           heroku container:login
