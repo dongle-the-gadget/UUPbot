@@ -1,0 +1,19 @@
+{
+  "name": "UUP dump bot"
+  "description": "Unofficial UUP dump bot for Discord"
+  "keywords": [
+    "discord",
+    "discord-bot",
+    "uup"
+    "uup-dump",
+    "microsoft",
+    "iso"
+  ],
+  "repository": "https://github.com/superkid200/UUPdumpbot",
+  "env": {
+    "UUPDUMP_BOTTOKEN": {
+      "description": "The Discord bot token, generated from Discord Developer Portal"
+    }
+  }
+  "stack": "Container"
+}
