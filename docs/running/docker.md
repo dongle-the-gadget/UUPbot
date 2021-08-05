@@ -14,7 +14,7 @@ docker build -t uupdumpbot .
 ```
 
 ## Running the bot
-If you have a Docker-compatible hosting service, use their documentation to host your bot. (Please note that you need to set the environment variable UUPDUMP_BOTTOKEN to the bot token you got from Discord Developers Portal)
+If you have a Docker-compatible hosting service, use their documentation to host your bot. (Please note that you need to set the environment variable `UUPDUMP_BOTTOKEN` to the bot token you got from Discord Developers Portal)
 
 If you prefer to run the bot on your local machine, create an `.env` file on the bot root folder with the following content (replace `[your bot token here]` with the bot token):
 ```
