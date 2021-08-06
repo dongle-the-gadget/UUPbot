@@ -25,7 +25,7 @@ You can get the premade binaries at [releases](https://github.com/superkid200/UU
 These binaries won't work on Windows 7.
 
 Architecture | File name
------------------------------------------------------
+-------------|---------------------------------------
 x86          | UUPbot-win-x86.exe
 x64          | UUPbot-win-x64.exe
 ARM32        | UUPbot-win-arm32.exe
@@ -34,14 +34,14 @@ ARM64        | UUPbot-win-arm64.exe
 #### macOS binaries
 
 Minimum required version | Architecture          | File name
-------------------------------------------------------------------------
+-------------------------|----------------------------------------------
 10.12 (Sierra)           | x64 (Intel)           | UUPbot-macos-x64
 11.01 (Big Sur)          | ARM64 (Apple Silicon) | UUPbot-macos-arm64
 
 #### Linux binaries
 
-Distribution (distro)                                      | Architecture | File name
----------------------------------------------------------------------------------------------
+Distribution (distro)                                     | Architecture | File name
+----------------------------------------------------------|--------------|-------------------
 x64-based CentOS, Debian, Fedora, Ubuntu, and derivatives | x64          | UUPbot-linux-x64
 Lightweight musl-based (i.e. Alphine)                     | x64          | UUPbot-linux-musl-x64
 ARM32-based Linux distros                                 | ARM32        | UUPbot-linux-arm32
