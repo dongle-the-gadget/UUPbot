@@ -3,7 +3,7 @@
 Please note that these steps require you to have "Manage Server" permission on the server you wish to invite the bot to.
 
 ## The easy and lazy way
-Click on [this link](https://discord.com/api/oauth2/authorize?client_id=872508836194447370&scope=applications.commands) and invite my premade bot to your server.
+Click on [this link](https://discord.com/api/oauth2/authorize?client_id=872508836194447370&permissions=0&scope=bot%20applications.commands) and invite my premade bot to your server.
 
 ## The hard but customizable (and maybe more reliable) way
 
