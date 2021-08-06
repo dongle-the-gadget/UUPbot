@@ -5,7 +5,7 @@ Please note that these steps require you to have "Manage Server" permission on t
 ## The easy and lazy way
 Click on [this link](https://discord.com/api/oauth2/authorize?client_id=872508836194447370&scope=applications.commands) and invite my premade bot to your server.
 
-## The hard but customizable way
+## The hard but customizable (and maybe more reliable) way
 
 ### Create the bot and invite it to your own server
   1. Go to [Discord Developers Portal](https://discord.com/developers), and create a new application.
