@@ -34,7 +34,7 @@ ARM64        | UUPbot-win-arm64.exe
 #### macOS binaries
 
 Minimum required version | Architecture          | File name
--------------------------|----------------------------------------------
+-------------------------|-----------------------|----------------------
 10.12 (Sierra)           | x64 (Intel)           | UUPbot-macos-x64
 11.01 (Big Sur)          | ARM64 (Apple Silicon) | UUPbot-macos-arm64
 
