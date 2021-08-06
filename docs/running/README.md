@@ -16,6 +16,8 @@ Click on [this link](https://discord.com/api/oauth2/authorize?client_id=87250883
   1. In the Discord Developers Portal, go to the Bot tab and select "Create a bot", confirm if asked
   2. Under Token, there should be two buttons: "Copy" and "Regenerate", select "Copy" and paste it somewhere safe, we will need it later.
 
+WARNING: Please keep the Token safe since anyone with the token can perform actions under your bot's credentials. If you found your token stolen, select Regenerate to invalidate the stolen one and get a new token.
+
 ### Get the binaries
 
 You can get the premade binaries at [releases](https://github.com/superkid200/UUPdumpbot/releases/latest). They are self-contained binaries so there's no need to install .NET 6 Runtime.
@@ -56,8 +58,6 @@ Then you can execute the bot executable and the bot should be online!
 ## Building your own binaries
 
 Follow the steps in **Premade binaries** to invite your bot and get the authentication token.
-
-WARNING: Please keep the Token safe since anyone with the token can perform actions under your bot's credentials. If you found your token stolen, select Regenerate to invalidate the stolen one and get a new token.
 
 ### Deploy the bot
 Clone the repository and choose one of the following deployment options:
