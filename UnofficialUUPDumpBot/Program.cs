@@ -34,7 +34,7 @@ namespace UnofficialUUPDumpBot
 
             slashCommands.RegisterCommands<SlashCommands>();
 
-            await client.ConnectAsync(activity: new DiscordActivity("Windows Insider ISOs", ActivityType.Playing));
+            await client.ConnectAsync(activity: new DiscordActivity("Windows Insider ISOs", ActivityType.Playing), UserStatus.Online);
 
             await Task.Delay(-1);
         }
