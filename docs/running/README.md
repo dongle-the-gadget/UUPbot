@@ -43,7 +43,7 @@ Minimum required version | Architecture          | File name
 Distribution (distro)                                     | Architecture | File name
 ----------------------------------------------------------|--------------|-------------------
 x64-based CentOS, Debian, Fedora, Ubuntu, and derivatives | x64          | UUPbot-linux-x64
-Lightweight musl-based (i.e. Alphine)                     | x64          | UUPbot-linux-musl-x64
+x64-based Lightweight musl-based (i.e. Alphine)           | x64          | UUPbot-linux-musl-x64
 ARM32-based Linux distros                                 | ARM32        | UUPbot-linux-arm32
 ARM64-based Linux distros                                 | ARM64        | UUPbot-linux-arm64
 
