@@ -9,6 +9,7 @@ Run the following command at bot's root folder:
 ```
 dotnet build ./UnofficialUUPDumpBot/UnofficialUUPDumpBot.csproj -c Release
 ```
+Please note that during the build process, warnings may appear. This is totally normal.
 
 ## Running the bot
 First, Set the `UUPDUMP_BOTTOKEN` environment variable to the bot token you got from Discord Developers Portal.

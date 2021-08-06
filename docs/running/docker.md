@@ -12,6 +12,7 @@ To create a docker image, run the following command:
 ```
 docker build -t uupdumpbot .
 ```
+Please note that you may encounter build warnings during this process. This is totally nnormal and should not affect bot performance.
 
 ## Running the bot
 If you have a Docker-compatible hosting service, use their documentation to host your bot. (Please note that you need to set the environment variable `UUPDUMP_BOTTOKEN` to the bot token you got from Discord Developers Portal)
