@@ -57,7 +57,7 @@ Then you can execute the bot executable and the bot should be online!
 
 ## Building your own binaries
 
-Follow the steps in **Premade binaries** to invite your bot and get the authentication token.
+Follow **Create the bot and invite it to your own server** and **Get the authentication token** in **Premade binaries** to invite your bot and get the authentication token.
 
 ### Deploy the bot
 Clone the repository and choose one of the following deployment options:
