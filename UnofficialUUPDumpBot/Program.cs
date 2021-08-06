@@ -1,4 +1,5 @@
 ﻿using DSharpPlus;
+using DSharpPlus.Entities;
 using DSharpPlus.SlashCommands;
 using System;
 using System.Collections.Generic;
@@ -33,7 +34,7 @@ namespace UnofficialUUPDumpBot
 
             slashCommands.RegisterCommands<SlashCommands>();
 
-            await client.ConnectAsync();
+            await client.ConnectAsync(activity: new DiscordActivity("Windows Insider ISOs", ActivityType.Playing));
 
             await Task.Delay(-1);
         }
