@@ -9,7 +9,7 @@ Click on [this link](https://discord.com/api/oauth2/authorize?client_id=87250883
 
 ### Create the bot and invite it to your own server
   1. Go to [Discord Developers Portal](https://discord.com/developers), and create a new application.
-  2. Go to the OAuth tab, check `applications.commands` and copy the generated OAuth link and paste it to a separate browser tab.
+  2. Go to the OAuth tab, check `applications.commands` and `bot` and copy the generated OAuth link and paste it to a separate browser tab.
   3. Follow the instructions on screen to invite the bot to your desired server.
 
 ### Get the authentication token
@@ -46,6 +46,12 @@ x64-based CentOS, Debian, Fedora, Ubuntu, and derivatives | x64          | UUPbo
 x64-based Lightweight musl-based (i.e. Alphine)           | x64          | UUPbot-linux-musl-x64
 ARM32-based Linux distros                                 | ARM32        | UUPbot-linux-arm32
 ARM64-based Linux distros                                 | ARM64        | UUPbot-linux-arm64
+
+### Run the binaries
+
+Before running, set the `UUPDUMP_BOTTOKEN` environment variable to the bot token you got from Discord Developers Portal.
+
+Then you can execute the bot executable and the bot should be online!
 
 ## Building your own binaries
 
