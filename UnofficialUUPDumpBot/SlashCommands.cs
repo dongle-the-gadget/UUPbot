@@ -103,14 +103,28 @@ namespace UnofficialUUPDumpBot
                 {
                     DiscordEmbedBuilder embed = new DiscordEmbedBuilder();
 
-                    UUPDumpRes response = JsonSerializer.Deserialize<UUPDumpRes>(await res.Content.ReadAsStringAsync());
-
-                    foreach (var item in response.response.builds.Values.Take(3))
+                    try
                     {
-                        embed.AddField(item.title, $"Architecture: {item.arch}\nLink: <https://uupdump.net/selectlang.php?id={item.uuid}>");
-                    }
+                        UUPDumpRes response = JsonSerializer.Deserialize<UUPDumpRes>(await res.Content.ReadAsStringAsync());
 
-                    await ctx.EditResponseAsync(new DiscordWebhookBuilder().AddEmbed(embed).WithContent("Here are the top three results I've found."));
+                        foreach (var item in response.response.builds.Values.Take(3))
+                        {
+                            embed.AddField(item.title, $"Architecture: {item.arch}\nLink: <https://uupdump.net/selectlang.php?id={item.uuid}>");
+                        }
+
+                        await ctx.EditResponseAsync(new DiscordWebhookBuilder().AddEmbed(embed).WithContent("Here are the top three results I've found."));
+                    }
+                    catch
+                    {
+                        UUPDumpRes2 response = JsonSerializer.Deserialize<UUPDumpRes2>(await res.Content.ReadAsStringAsync());
+
+                        foreach (var item in response.response.builds.Take(3))
+                        {
+                            embed.AddField(item.title, $"Architecture: {item.arch}\nLink: <https://uupdump.net/selectlang.php?id={item.uuid}>");
+                        }
+
+                        await ctx.EditResponseAsync(new DiscordWebhookBuilder().AddEmbed(embed).WithContent("Here are the top three results I've found."));
+                    }
                 }
             }
             catch

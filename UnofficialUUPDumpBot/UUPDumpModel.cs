@@ -23,4 +23,14 @@ namespace UnofficialUUPDumpBot
     {
         public Response response { get; set; }
     }
+
+    public class Response2
+    {
+        public List<UupItem> builds { get; set; }
+    }
+
+    public class UUPDumpRes2
+    {
+        public Response2 response { get; set; }
+    }
 }
