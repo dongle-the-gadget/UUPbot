@@ -5,12 +5,10 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Net.Http;
-using System.Text;
 using System.Text.Json;
 using System.Threading.Tasks;
 using System.Web;
 using WindowsUpdateLib;
-using System.Net.NetworkInformation;
 using Microsoft.Extensions.Logging;
 
 namespace UnofficialUUPDumpBot
@@ -131,36 +129,6 @@ namespace UnofficialUUPDumpBot
                 await ctx.EditResponseAsync(new DiscordWebhookBuilder().WithContent("Sorry, but the bot encountered an error and cannot continue processing your request."));
                 ctx.Client.Logger.LogError(ex.ToString());
             }
-        }
-        
-        [SlashCommand("testup", "Test bot, UUP dump and Microsoft's Windows Updates server status.")]
-        public async Task PingAsync(InteractionContext ctx)
-        {
-            await ctx.CreateResponseAsync(DSharpPlus.InteractionResponseType.DeferredChannelMessageWithSource);
-            
-            try
-            {
-                var pingdump = await PingServerAsync("api.uupdump.net", 4000);
-                
-                DiscordWebhookBuilder builder = new DiscordWebhookBuilder().WithContent($"Pong!\n" +
-                    $"**UUP dump API ping status:** {pingdump.Status}\n" +
-                    $"**UUP dump API address:** {pingdump.Address}\n" +
-                    $"**UUP dump API round trip time:** {pingdump.Status}");
-                
-                await ctx.EditResponseAsync(builder);
-            }
-            catch (Exception ex)
-            {
-                await ctx.EditResponseAsync(new DiscordWebhookBuilder().WithContent("Sorry, but the bot encountered an error and cannot continue processing your request."));
-                ctx.Client.Logger.LogError(ex.ToString());
-            }
-        }
-        
-        private async Task<PingReply> PingServerAsync(string host, int milTimeout)
-        {
-            Ping ping = new Ping();
-            
-            return await ping.SendPingAsync(host, milTimeout);
         }
     }
 }
