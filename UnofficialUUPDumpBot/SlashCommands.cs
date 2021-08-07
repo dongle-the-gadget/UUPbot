@@ -130,7 +130,7 @@ namespace UnofficialUUPDumpBot
             }
             catch
             {
-                
+                await ctx.EditResponseAsync(new DiscordWebhookBuilder().WithContent("Sorry, but the bot encountered an error and cannot continue processing your request."));
             }
         }
         
@@ -139,7 +139,7 @@ namespace UnofficialUUPDumpBot
         {
             await ctx.CreateResponseAsync(DSharpPlus.InteractionResponseType.DeferredChannelMessageWithSource);
             
-            try await ctx.EditResponseAsync(new DiscordWebhookBuilder().WithContent("Sorry, but the bot encountered an error and cannot continue processing your request."));
+            try
             {
                 var pingdump = await PingServerAsync("uupdump.net", 4000);
                 var msdump = await PingServerAsync("fe3cr.delivery.mp.microsoft.com", 4000);
