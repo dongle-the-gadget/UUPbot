@@ -33,6 +33,12 @@ namespace UnofficialUUPDumpBot
                 HttpResponseMessage httpResponse = await client.GetAsync($"https://api.uupdump.net/fetchupd.php?ring={branch}&arch={arch}");
 
                 string resJson = await httpResponse.Content.ReadAsStringAsync();
+                
+                if (resJson.Contains("NO_UPDATE_FOUND", StringComparison.InvariantCultureIgnoreCase))
+                {
+                    await ctx.EditResponseAsync(new DiscordWebhookBuilder().WithContent("There are no updates matching your criteria."));
+                    return;
+                }
 
                 UUPDumpRes3 res = JsonSerializer.Deserialize<UUPDumpRes3>(resJson);
 
