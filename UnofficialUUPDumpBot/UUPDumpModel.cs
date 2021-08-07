@@ -33,4 +33,22 @@ namespace UnofficialUUPDumpBot
     {
         public Response2 response { get; set; }
     }
+
+    public class UpdateArray3
+    {
+        public string updateId { get; set; }
+        public string updateTitle { get; set; }
+        public string foundBuild { get; set; }
+        public string arch { get; set; }
+    }
+
+    public class Response3
+    {
+        public List<UpdateArray3> updateArray { get; set; }
+    }
+
+    public class UUPDumpRes3
+    {
+        public Response3 response { get; set; }
+    }
 }

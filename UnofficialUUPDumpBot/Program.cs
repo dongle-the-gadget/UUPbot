@@ -9,7 +9,6 @@ using System.Net.Http;
 using System.Text.Json;
 using System.Threading.Tasks;
 using System.Web;
-using WindowsUpdateLib;
 
 namespace UnofficialUUPDumpBot
 {

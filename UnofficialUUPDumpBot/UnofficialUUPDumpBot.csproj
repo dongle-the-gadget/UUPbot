@@ -7,7 +7,6 @@
 
   <ItemGroup>
     <ProjectReference Include="..\DSharpPlus.SlashCommands\DSharpPlus.SlashCommands.csproj" />
-    <ProjectReference Include="..\WindowsUpdateLib\WindowsUpdateLib.csproj" />
   </ItemGroup>
 
 </Project>

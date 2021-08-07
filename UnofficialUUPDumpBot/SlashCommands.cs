@@ -8,38 +8,19 @@ using System.Net.Http;
 using System.Text.Json;
 using System.Threading.Tasks;
 using System.Web;
-using WindowsUpdateLib;
 using Microsoft.Extensions.Logging;
 
 namespace UnofficialUUPDumpBot
 {
     public class SlashCommands : SlashCommandModule
     {
-        static Dictionary<string, CTAC> GetRingCtacs(MachineType arch)
-        {
-            return new Dictionary<string, CTAC>
-            {
-                { "Dev", new CTAC(OSSkuId.Professional, "10.0.19041.200", arch, "External", "Dev", "CB", "vb_release", "Production", false, false) },
-                { "Beta", new CTAC(OSSkuId.Professional, "10.0.19041.200", arch, "External", "Beta", "CB", "vb_release", "Production", false, false) },
-                { "ReleasePreview", new CTAC(OSSkuId.Professional, "10.0.19041.200", arch, "External", "ReleasePreview", "CB", "vb_release", "Production", false, false) },
-                { "Retail", new CTAC(OSSkuId.Professional, "10.0.19041.84", arch, "Retail", "", "CB", "vb_release", "Production", false) }
-            };
-        }
-
-        static UpdateData TrimDeltasFromUpdateData(UpdateData update)
-        {
-            update.Xml.Files.File = update.Xml.Files.File.Where(x => !x.FileName.Replace('\\', Path.DirectorySeparatorChar).EndsWith(".psf", StringComparison.InvariantCultureIgnoreCase)
-            && !x.FileName.Replace('\\', Path.DirectorySeparatorChar).StartsWith("Diff", StringComparison.InvariantCultureIgnoreCase)
-             && !x.FileName.Replace('\\', Path.DirectorySeparatorChar).StartsWith("Baseless", StringComparison.InvariantCultureIgnoreCase)).ToArray();
-            return update;
-        }
 
         [SlashCommand("list", "List the latest build items belonging to a specific channel")]
         public async Task ListDumpItems(InteractionContext ctx,
             [Option("channel", "The channel to get builds from")]
-            [Choice("Dev", "Dev")][Choice("Beta", "Beta")][Choice("ReleasePreview", "ReleasePreview")][Choice("Retail", "Retail")]string branch,
+            [Choice("Dev", "WIF")][Choice("Beta", "WIS")][Choice("ReleasePreview", "rp")][Choice("Retail", "retail")]string branch,
             [Option("arch", "The architecture")]
-            [Choice("x86", "x86")][Choice("x64", "amd64")][Choice("arm64", "arm64")]string arch)
+            [Choice("x86", "x86")][Choice("x64", "amd64")][Choice("ARM64", "arm64")]string arch)
         {
             await ctx.CreateResponseAsync(DSharpPlus.InteractionResponseType.DeferredChannelMessageWithSource);
 
@@ -47,26 +28,18 @@ namespace UnofficialUUPDumpBot
             {
                 DiscordEmbedBuilder embed = new DiscordEmbedBuilder();
 
-                IEnumerable<UpdateData> data = await FE3Handler.GetUpdates(null, GetRingCtacs(Enum.Parse<MachineType>(arch))[branch], string.Empty, FileExchangeV3UpdateFilter.ProductRelease).ConfigureAwait(false);
-                data = data.Select(x => TrimDeltasFromUpdateData(x));
+                HttpClient client = new HttpClient();
 
-                foreach (UpdateData update in data)
+                HttpResponseMessage httpResponse = await client.GetAsync($"https://api.uupdump.net/fetchupd.php?ring={branch}&arch={arch}");
+
+                string resJson = await httpResponse.Content.ReadAsStringAsync();
+
+                UUPDumpRes3 res = JsonSerializer.Deserialize<UUPDumpRes3>(resJson);
+
+                foreach (var item in res.response.updateArray)
                 {
-                    string title = update.Xml.LocalizedProperties.Title;
-
-                    string encodedTitle = HttpUtility.UrlEncode(title);
-
-                    HttpClient client = new HttpClient();
-                    var res = await client.GetAsync($"https://api.uupdump.net/listid.php?search={encodedTitle}");
-
-                    UUPDumpRes response = JsonSerializer.Deserialize<UUPDumpRes>(await res.Content.ReadAsStringAsync());
-
-                    if (response.response != null)
-                    {
-                        var item = response.response.builds.Values.First(f => f.arch == arch);
-
-                        embed.AddField(item.title, $"Architecture: {item.arch}\nLink: <https://uupdump.net/selectlang.php?id={item.uuid}>");
-                    }
+                    embed.AddField(item.updateTitle, $"Architecture: {item.arch}\n" +
+                        $"Link: <https://uupdump.net/selectlang.php?id={item.updateId}>");
                 }
 
                 await ctx.EditResponseAsync(new DiscordWebhookBuilder().AddEmbed(embed).WithContent("Here is the latest build items I've found matching your criteria."));
