@@ -10,6 +10,7 @@ using System.Text.Json;
 using System.Threading.Tasks;
 using System.Web;
 using WindowsUpdateLib;
+using System.Net.NetworkInformation;
 
 namespace UnofficialUUPDumpBot
 {
@@ -129,8 +130,37 @@ namespace UnofficialUUPDumpBot
             }
             catch
             {
+                
+            }
+        }
+        
+        [SlashCommand("testup", "Test bot, UUP dump and Microsoft's Windows Updates server status.")]
+        public async Task PingAsync(InteractionContext ctx)
+        {
+            await ctx.CreateResponseAsync(DSharpPlus.InteractionResponseType.DeferredChannelMessageWithSource);
+            
+            try await ctx.EditResponseAsync(new DiscordWebhookBuilder().WithContent("Sorry, but the bot encountered an error and cannot continue processing your request."));
+            {
+                var pingdump = await PingServerAsync("uupdump.net", 4000);
+                var msdump = await PingServerAsync("fe3cr.delivery.mp.microsoft.com", 4000);
+                
+                DiscordWebhookBuilder builder = new().WithContent($"Pong!\n**UUP dump servers:** {pingdump}\n**Microsoft servers:** {msdump}");
+                
+                await ctx.EditResponseAsync(builder);
+            }
+            catch 
+            {
                 await ctx.EditResponseAsync(new DiscordWebhookBuilder().WithContent("Sorry, but the bot encountered an error and cannot continue processing your request."));
             }
+        }
+        
+        private async Task<IPStatus> PingServerAsync(string host, int milTimeout)
+        {
+            Ping ping = new Ping();
+            
+            PingReply reply = await ping.SendPingAsync(host, milTimeout);
+            
+            return reply.Status;
         }
     }
 }
