@@ -144,7 +144,7 @@ namespace UnofficialUUPDumpBot
                 var pingdump = await PingServerAsync("uupdump.net", 4000);
                 var msdump = await PingServerAsync("fe3cr.delivery.mp.microsoft.com", 4000);
                 
-                DiscordWebhookBuilder builder = new().WithContent($"Pong!\n**UUP dump servers:** {pingdump}\n**Microsoft servers:** {msdump}");
+                DiscordWebhookBuilder builder = new DiscordWebhookBuilder().WithContent($"Pong!\n**UUP dump servers:** {pingdump}\n**Microsoft servers:** {msdump}");
                 
                 await ctx.EditResponseAsync(builder);
             }
