@@ -11,6 +11,7 @@ using System.Threading.Tasks;
 using System.Web;
 using WindowsUpdateLib;
 using System.Net.NetworkInformation;
+using Microsoft.Extensions.Logging;
 
 namespace UnofficialUUPDumpBot
 {
@@ -68,17 +69,14 @@ namespace UnofficialUUPDumpBot
 
                         embed.AddField(item.title, $"Architecture: {item.arch}\nLink: <https://uupdump.net/selectlang.php?id={item.uuid}>");
                     }
-                    else
-                    {
-                        // We tripped an error!
-                    }
                 }
 
                 await ctx.EditResponseAsync(new DiscordWebhookBuilder().AddEmbed(embed).WithContent("Here is the latest build items I've found matching your criteria."));
             }
-            catch
+            catch (Exception ex)
             {
                 await ctx.EditResponseAsync(new DiscordWebhookBuilder().WithContent("Sorry, but the bot encountered an error and cannot continue processing your request."));
+                ctx.Client.Logger.LogError(ex.ToString());
             }
         }
 
@@ -128,9 +126,10 @@ namespace UnofficialUUPDumpBot
                     }
                 }
             }
-            catch
+            catch (Exception ex)
             {
                 await ctx.EditResponseAsync(new DiscordWebhookBuilder().WithContent("Sorry, but the bot encountered an error and cannot continue processing your request."));
+                ctx.Client.Logger.LogError(ex.ToString());
             }
         }
         
@@ -141,26 +140,27 @@ namespace UnofficialUUPDumpBot
             
             try
             {
-                var pingdump = await PingServerAsync("uupdump.net", 4000);
-                var msdump = await PingServerAsync("fe3cr.delivery.mp.microsoft.com", 4000);
+                var pingdump = await PingServerAsync("api.uupdump.net", 4000);
                 
-                DiscordWebhookBuilder builder = new DiscordWebhookBuilder().WithContent($"Pong!\n**UUP dump servers:** {pingdump}\n**Microsoft servers:** {msdump}");
+                DiscordWebhookBuilder builder = new DiscordWebhookBuilder().WithContent($"Pong!\n" +
+                    $"**UUP dump API ping status:** {pingdump.Status}\n" +
+                    $"**UUP dump API address:** {pingdump.Address}\n" +
+                    $"**UUP dump API round trip time:** {pingdump.Status}");
                 
                 await ctx.EditResponseAsync(builder);
             }
-            catch 
+            catch (Exception ex)
             {
                 await ctx.EditResponseAsync(new DiscordWebhookBuilder().WithContent("Sorry, but the bot encountered an error and cannot continue processing your request."));
+                ctx.Client.Logger.LogError(ex.ToString());
             }
         }
         
-        private async Task<IPStatus> PingServerAsync(string host, int milTimeout)
+        private async Task<PingReply> PingServerAsync(string host, int milTimeout)
         {
             Ping ping = new Ping();
             
-            PingReply reply = await ping.SendPingAsync(host, milTimeout);
-            
-            return reply.Status;
+            return await ping.SendPingAsync(host, milTimeout);
         }
     }
 }
