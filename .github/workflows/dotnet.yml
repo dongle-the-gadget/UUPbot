@@ -1,8 +1,6 @@
-name: .NET
+name: Test .NET building
 
 on:
-  push:
-    branches: [ main ]
   pull_request:
     branches: [ main ]
 
