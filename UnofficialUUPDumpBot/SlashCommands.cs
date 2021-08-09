@@ -48,7 +48,7 @@ namespace UnofficialUUPDumpBot
                         $"Link: <https://uupdump.net/selectlang.php?id={item.updateId}>");
                 }
 
-                await ctx.EditResponseAsync(new DiscordWebhookBuilder().AddEmbed(embed).WithContent("Here is the latest build items I've found matching your criteria."));
+                await ctx.EditResponseAsync(new DiscordWebhookBuilder().AddEmbed(embed).WithContent("Here are the latest build items I've found matching your criteria."));
             }
             catch (Exception ex)
             {
