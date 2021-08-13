@@ -9,11 +9,11 @@ Please note that these steps require you to have "Manage Server" permission on t
 
 ### Create the bot and invite it to your own server
   1. Go to [Discord Developers Portal](https://discord.com/developers), and create a new application.
-  2. Go to the OAuth tab, check `applications.commands` and `bot` and copy the generated OAuth link and paste it to a separate browser tab.
+  2. Go to the OAuth tab, check `applications.commands` and `bot`, copy the generated OAuth link and paste it to a separate browser tab.
   3. Follow the instructions on screen to invite the bot to your desired server.
 
 ### Get the authentication token
-  1. In the Discord Developers Portal, go to the Bot tab and select "Create a bot", confirm if asked
+  1. In the Discord Developers Portal, go to the Bot tab and select "Add bot", confirm if asked.
   2. Under Token, there should be two buttons: "Copy" and "Regenerate", select "Copy" and paste it somewhere safe, we will need it later.
 
 WARNING: Please keep the Token safe since anyone with the token can perform actions under your bot's credentials. If you found your token stolen, select Regenerate to invalidate the stolen one and get a new token.
