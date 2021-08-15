@@ -30,7 +30,7 @@ namespace UnofficialUUPDumpBot
 
                 HttpClient client = new HttpClient();
 
-                HttpResponseMessage httpResponse = await client.GetAsync($"https://api.uupdump.net/fetchupd.php?ring={branch}&arch={arch}");
+                HttpResponseMessage httpResponse = await client.GetAsync($"https://api.uupdump.net/fetchupd.php?ring={branch}&arch={arch}{branch == "rp" ? "&build=19044.1" : ""}");
 
                 string resJson = await httpResponse.Content.ReadAsStringAsync();
                 
