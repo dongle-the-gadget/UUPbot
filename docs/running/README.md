@@ -20,7 +20,7 @@ WARNING: Please keep the Token safe since anyone with the token can perform acti
 
 ### Get the binaries
 
-You can get the premade binaries at [releases](https://github.com/superkid200/UUPdumpbot/releases/latest). They are self-contained binaries so there's no need to install .NET 6 Runtime.
+You can get the premade binaries at [releases](https://github.com/superkid200/UUPdumpbot/releases/latest). They are self-contained binaries so there's no need to install .NET 5 Runtime.
 
 #### Windows binaries
 
