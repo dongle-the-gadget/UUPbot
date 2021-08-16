@@ -1,11 +1,11 @@
-﻿using DSharpPlus.Entities;
+using DSharpPlus.Entities;
 using DSharpPlus.SlashCommands;
 using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Net.Http;
-using System.Text.Json;
+using Newtonsoft.Json;
 using System.Threading.Tasks;
 using System.Web;
 using Microsoft.Extensions.Logging;
@@ -18,9 +18,9 @@ namespace UnofficialUUPDumpBot
         [SlashCommand("list", "List the latest build items belonging to a specific channel")]
         public async Task ListDumpItems(InteractionContext ctx,
             [Option("channel", "The channel to get builds from")]
-            [Choice("Dev", "WIF")][Choice("Beta", "WIS")][Choice("ReleasePreview", "rp")][Choice("Retail", "retail")]string branch,
+            [Choice("Dev", "WIF")][Choice("Beta", "WIS")][Choice("Release Preview", "rp")][Choice("Retail", "retail")]string branch,
             [Option("arch", "The architecture")]
-            [Choice("x86", "x86")][Choice("x64", "amd64")][Choice("ARM64", "arm64")]string arch)
+            [Choice("x64", "amd64")][Choice("ARM64", "arm64")][Choice("x86", "x86")]string arch)
         {
             await ctx.CreateResponseAsync(DSharpPlus.InteractionResponseType.DeferredChannelMessageWithSource);
 
@@ -30,12 +30,7 @@ namespace UnofficialUUPDumpBot
 
                 HttpClient client = new HttpClient();
                 
-                string url = $"https://api.uupdump.net/fetchupd.php?ring={branch}&arch={arch}";
-                
-                if (branch == "rp")
-                {
-                    url += "&build=19044.1";
-                }
+                string url = $"https://api.uupdump.net/fetchupd.php?ring={branch}&arch={arch}&build={JsonConvert.DeserializeObject<Dictionary<string, string>>(File.ReadAllText("builds.json"))[branch]}";
 
                 HttpResponseMessage httpResponse = await client.GetAsync(url);
 
@@ -47,7 +42,7 @@ namespace UnofficialUUPDumpBot
                     return;
                 }
 
-                UUPDumpRes3 res = JsonSerializer.Deserialize<UUPDumpRes3>(resJson);
+                UUPDumpRes3 res = JsonConvert.DeserializeObject<UUPDumpRes3>(resJson);
 
                 foreach (var item in res.response.updateArray)
                 {
@@ -88,7 +83,7 @@ namespace UnofficialUUPDumpBot
 
                     try
                     {
-                        UUPDumpRes response = JsonSerializer.Deserialize<UUPDumpRes>(await res.Content.ReadAsStringAsync());
+                        UUPDumpRes response = JsonConvert.DeserializeObject<UUPDumpRes>(await res.Content.ReadAsStringAsync());
 
                         foreach (var item in response.response.builds.Values.Take(3))
                         {
@@ -99,7 +94,7 @@ namespace UnofficialUUPDumpBot
                     }
                     catch
                     {
-                        UUPDumpRes2 response = JsonSerializer.Deserialize<UUPDumpRes2>(await res.Content.ReadAsStringAsync());
+                        UUPDumpRes2 response = JsonConvert.DeserializeObject<UUPDumpRes2>(await res.Content.ReadAsStringAsync());
 
                         foreach (var item in response.response.builds.Take(3))
                         {
