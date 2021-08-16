@@ -29,8 +29,15 @@ namespace UnofficialUUPDumpBot
                 DiscordEmbedBuilder embed = new DiscordEmbedBuilder();
 
                 HttpClient client = new HttpClient();
+                
+                string url = $"https://api.uupdump.net/fetchupd.php?ring={branch}&arch={arch}";
+                
+                if (branch == "rp")
+                {
+                    url += "&build=19044.1";
+                }
 
-                HttpResponseMessage httpResponse = await client.GetAsync($"https://api.uupdump.net/fetchupd.php?ring={branch}&arch={arch}{branch == "rp" ? "&build=19044.1" : ""}");
+                HttpResponseMessage httpResponse = await client.GetAsync(url);
 
                 string resJson = await httpResponse.Content.ReadAsStringAsync();
                 
